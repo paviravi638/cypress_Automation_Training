@@ -1,4 +1,4 @@
-context("API Automation Testing",()=>{
+describe("API Automation Testing",()=>{
     it("GET-List User", () =>{
         cy.request('GET','https://reqres.in/api/users?page=2~').then((response)=>{
             expect(response.status).equal(200)
