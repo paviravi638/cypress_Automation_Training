@@ -1,4 +1,4 @@
-context("User Management API Automation",()=>{
+context("API Automation Testing",()=>{
     it("GET-List User", () =>{
         cy.request('GET','https://reqres.in/api/users?page=2~').then((response)=>{
             expect(response.status).equal(200)
@@ -9,7 +9,7 @@ context("User Management API Automation",()=>{
     it("POST-Create User", () =>
         {
         var user = {
-            "name": "Bowthika",
+            "name": "Pavithran",
             "job": "QA"
         }
 
@@ -24,8 +24,8 @@ context("User Management API Automation",()=>{
 
     it("UPDATE- User list", ()=>{
         var user1 ={
-            "name": "Bowthika Ravi",
-            "job": "QA Engineer"
+            "name": "Pavi",
+            "job": "Junior QA Engineer"
         }
         cy.request('PUT','https://reqres.in/api/users/2',user1).then((response)=>{
             expect(response.status).equal(200)
