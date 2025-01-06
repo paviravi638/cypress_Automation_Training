@@ -1,29 +1,32 @@
-import LoginPage from '../PageObjects/LoginPage.cy'
-describe('PageObjectModel', function() {
-    it('Create a Rediffmail account', function () {
-        
-        const lp= new LoginPage()
-        lp.visit();
-        lp.fillFullName('xyz')
-        lp.fillChooseRediffmailID('test')
-        lp.clickButton()
-        cy.get("div[id='check_availability'] b:nth-child(1)").should('contain', "Sorry, the ID that you are looking for is taken.")
-        lp.fillChooseRediffmailID('pomedtest')
-        lp.clickButton()
-        cy.get("div[id='check_availability'] b:nth-child(1)").should('contain', "Yippie! The ID you've chosen is available.")
-        lp.fillPassword('Pavi@123')
-        lp.fillRetypePassword('Pavi@123')
-        lp.fillAlternateEmailAddress('Pavi@gmail.com')
-        lp.fillMobileNo('1234567890')
-        lp.selectDate('17')
-        lp.selectMonth('10')
-        lp.selectYear('2000')
-        lp.CheckGender()
-        lp.selectCountry('India')
-        lp.selectCity('Agra')
-        lp.enterText('SDFE') 
-        lp.submit()
-        cy.get("body > center:nth-child(3) > form:nth-child(1) > div:nth-child(1) > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1) > font:nth-child(1) > b:nth-child(1)")
-        .should('be.visible').should('contain', "The code you've entered does not match with the code in the image")
-    });
-});
+describe('My Test Suite', function (){
+    
+    it('LoginTest', function(){
+        cy.login('paviravi638gmail.com','Pavi')
+
+        //REDIFF REGISTRATION FORM
+Cypress.Commands.add("login",(email,password) => {
+
+    cy.visit('http://register.rediff.com/register/register.php?FormName=user_details')
+    cy.get('[width="200"] > input').type('Pavithran')
+    cy.get('[valign="bottom"] > [type="text"]').should('be.visible').type('xyz')
+    cy.get('.btn_checkavail').should('be.visible').click()
+    cy.get(':nth-child(1) > [width="20"] > #radio_login').should('be.visible').click()
+    cy.get('#newpasswd').should('be.visible').type('Xyz123@')
+    cy.get('#newpasswd1').should('be.visible').type('password')
+    cy.get(':nth-child(1) > [width="185"] > input').type('paviravi638gmail.com')
+    cy.get('.nomargin').should('not.be.checked')
+    cy.get('#mobno').type('9876543210')
+    cy.get('#tblcrtac > tbody > tr:nth-child(23) > td:nth-child(3) > select:nth-child(1)').select("17")
+    cy.get('#tblcrtac > tbody > tr:nth-child(23) > td:nth-child(3) > select:nth-child(2)').select("OCT")
+    cy.get('#tblcrtac > tbody > tr:nth-child(23) > td:nth-child(3) > select:nth-child(3)').select("2000")
+    cy.get('input[value=m]').should('be.checked')
+    cy.get('#country')
+    .select('India')
+    cy.get('.captcha').type('QEQP')
+    cy.get('#Register').click()
+    
+    })
+   
+    })
+
+})
